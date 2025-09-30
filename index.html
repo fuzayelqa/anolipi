@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anolipi Digital Clone</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Custom CSS --- */
+        :root {
+            --primary-purple: #9333ea; /* A shade of purple */
+            --light-purple: #c084fc;
+            --dark-blue: #1e1b4b;
+            --background-start: #2b0051;
+            --background-end: #0d001a;
+            --text-color: #e5e7eb;
+            --text-muted-color: #9ca3af;
+            --gradient-1: #a855f7;
+            --gradient-2: #ef4444;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-end);
+            background-image: radial-gradient(circle at top left, rgba(147, 51, 234, 0.5), transparent 40%),
+                              linear-gradient(135deg, var(--background-start) 0%, var(--background-end) 100%);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: rgba(13, 0, 26, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--text-color) !important;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-purple) !important;
+        }
+
+        .btn-gradient {
+            background-image: linear-gradient(to right, var(--gradient-1) 0%, var(--gradient-2) 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: white;
+        }
+        
+        .btn-outline-custom {
+            border: 1px solid var(--primary-purple);
+            color: var(--primary-purple);
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .btn-outline-custom:hover {
+            background-color: var(--primary-purple);
+            color: white;
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            padding-top: 150px;
+            padding-bottom: 100px;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: -webkit-linear-gradient(#eee, #b9b9b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-feature {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+        .hero-feature:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+        .hero-feature i {
+            color: var(--light-purple);
+            font-size: 1.5rem;
+        }
+
+        /* --- Services Section --- */
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: -1;
+            margin: -1px; /* Border width */
+            border-radius: inherit; /* Inherit rounded corners */
+            background: linear-gradient(to right, var(--primary-purple), var(--light-purple));
+        }
+
+        .service-card .icon-box {
+            color: var(--primary-purple);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- Partners Section --- */
+        .partner-logo {
+            filter: grayscale(100%) brightness(500%); /* Make logos white */
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            height: 30px;
+        }
+        .partner-logo:hover {
+            opacity: 1;
+        }
+
+        /* --- Expertise & Why Us Section --- */
+        .list-expertise li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .list-expertise li::before {
+            content: "\F26A"; /* Bootstrap Icon check */
+            font-family: 'bootstrap-icons';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--primary-purple);
+            font-size: 1.2rem;
+        }
+
+        /* --- Impact Section --- */
+        .impact-box {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 15px;
+        }
+        .impact-box .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+        }
+
+        /* --- CTA Section --- */
+        .cta-box {
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 50px;
+        }
+        
+        /* --- Footer --- */
+        footer {
+            background: var(--background-end) url('https://www.transparenttextures.com/patterns/black-felt.png'); /* Subtle texture */
+            padding-top: 60px;
+            padding-bottom: 30px;
+            background-size: cover;
+            position: relative;
+        }
+        footer .footer-map{
+            content: '';
+            background-image: url("data:image/svg+xml,%3Csvg width='1000' height='482' viewBox='0 0 1000 482' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M83.9515 210.831L83.0485 212.031L81.2424 212.152L80.9404 213.352L82.1465 214.252L82.1465 215.152L83.6505 215.152L84.8566 216.052L85.1586 217.552L84.2556 217.552L83.3525 218.452L83.3525 219.952L84.2556 220.552L85.1586 221.752L85.4606 223.252L87.5687 223.252L88.1717 222.052L88.7747 222.352L90.2788 221.752L90.8818 220.252L92.0879 220.252L92.9909 219.052L92.9909 217.252L91.7848 216.052L91.7848 214.552L93.2889 213.352L92.9909 212.452L91.4869 212.152L91.1848 210.831L90.2788 210.231L88.7747 210.531L87.8717 209.631L86.0657 209.631L85.1586 210.831L83.9515 210.831ZM102.04 163.78L102.04 162.28L101.137 161.08L101.137 159.58L102.343 158.38L102.343 155.38L101.44 153.88L101.44 152.08L100.234 151.18L100.536 149.38L101.44 148.48L102.646 148.48L103.249 149.98L104.753 149.98L105.656 148.78L107.16 148.78L107.763 147.88L107.16 146.68L107.16 145.18L108.366 143.98L109.87 143.98L110.172 143.08L108.966 142.18L108.966 141.28L109.569 140.38L109.267 139.18L110.172 138.28L111.378 138.28L111.981 137.08L111.378 136.18L111.076 135.28L111.981 134.68L113.187 134.68L113.489 135.58L114.695 135.58L115.3 134.68L115.3 133.48L114.093 132.28L114.093 130.48L115.3 129.58L116.506 129.58L117.409 128.38L117.409 126.88L116.203 125.68L116.203 124.48L117.106 123.58L116.804 121.78L115.901 121.18L115.3 121.78L114.695 121.18L114.093 119.38L113.187 118.78L112.584 119.08L112.282 118.18L112.584 117.28L111.981 116.38L112.884 116.08L113.489 114.88L114.392 114.88L115.3 113.98L115.3 112.78L116.203 112.18L117.707 112.18L118.61 110.98L118.308 110.08L118.911 109.18L118.308 108.28L119.213 107.38L118.61 106.18L119.816 105.28L120.719 105.58L121.322 104.68L121.322 103.78L122.225 102.88L121.923 101.68L122.828 100.78L122.225 99.8799L122.828 98.9799L122.526 97.7799L121.623 97.1799L121.02 96.2799L121.623 95.3799L120.719 94.7799L120.117 93.5799L121.02 92.6799L121.02 91.1799L120.117 90.5799L119.514 89.3799L120.417 88.4799L121.923 88.4799L123.13 89.6799L124.033 89.0799L125.239 89.3799L125.842 90.2799L126.745 90.2799L127.348 91.1799L128.554 91.1799L129.157 92.0799L129.157 93.5799L130.363 94.4799L130.363 96.2799L131.569 97.1799L131.569 98.6799L130.666 99.5799L130.666 101.08L131.872 101.98L131.872 103.48L130.969 104.38L131.271 105.58L132.174 106.18L133.077 105.58L133.077 106.78L134.283 107.68L134.283 108.88L133.38 109.78L133.38 111.28L134.586 112.18L134.586 113.38L133.983 114.28L133.983 115.48L134.888 116.38L134.283 117.28L135.489 117.88L135.791 119.38L136.694 119.98L137.6 119.38L138.203 119.98L139.106 119.38L139.709 119.98L140.612 119.38L141.215 119.98L141.818 119.38L142.421 119.98L143.024 119.38L143.627 119.98L144.23 119.38L144.833 119.98L145.436 119.38L146.039 119.98L146.942 119.38L147.545 119.98L147.847 121.18L148.75 121.48L149.353 122.68L150.256 122.38L151.159 123.28L151.461 124.48L152.667 125.08L152.969 126.28L152.066 126.88L151.461 128.08L151.461 129.28L152.364 129.88L152.364 131.08L153.57 131.68L153.57 133.18L152.364 133.78L152.364 135.28L151.159 135.88L151.159 137.38L152.066 137.98L151.461 139.18L151.763 140.38L150.86 140.98L150.86 142.18L150.256 143.08L149.653 142.48L148.447 142.78L147.847 143.68L146.942 143.68L146.039 144.88L146.039 146.38L147.245 147.28L147.245 148.48L146.342 149.38L146.342 150.58L147.545 151.48L147.545 152.68L146.642 153.58L146.642 154.78L147.847 155.68L147.847 156.88L146.942 157.78L146.942 158.98L148.148 159.88L148.148 161.08L147.245 161.98L147.245 163.18L148.447 164.08L148.447 165.28L147.545 166.18L146.342 165.88L145.136 166.48L144.833 167.98L143.627 167.98L142.724 167.08L142.724 165.88L141.518 164.68L140.312 164.98L139.709 164.08L138.203 164.08L137.298 163.18L137.6 161.98L136.394 161.38L136.394 159.88L135.188 158.98L135.188 157.48L133.983 156.58L133.983 155.08L132.777 154.18L132.777 152.68L131.569 151.78L131.569 150.28L130.363 149.38L130.363 147.88L129.157 146.98L129.157 145.48L127.951 144.58L127.951 143.08L126.745 142.18L126.745 140.68L125.539 139.78L125.539 138.28L124.333 137.38L124.333 135.88L123.127 134.98L123.127 133.48L121.921 132.58L121.921 131.08L120.715 130.18L120.715 128.68L119.509 127.78L119.509 126.28L118.303 125.38L118.303 123.88L117.097 122.98L117.097 121.48L115.891 120.58L115.891 119.08L114.685 118.18L114.685 116.68L113.479 115.78L113.479 114.28L112.273 113.38L112.273 111.88L111.067 110.98L111.067 109.48L109.861 108.58L109.861 107.08L108.655 106.18L108.655 104.68L107.448 103.78L107.448 102.28L106.242 101.38L106.242 100.18L105.036 99.2799L105.036 97.7799L103.83 96.8799L103.83 95.3799L102.624 94.4799L102.624 92.9799L101.418 92.0799L101.418 90.5799L100.212 89.6799L100.212 88.1799L99.0061 87.2799L99.0061 85.7799L97.8001 84.8799L97.8001 83.3799L96.594 82.4799L96.594 80.9799L95.388 80.0799L95.388 78.5799L94.1819 77.6799L94.1819 76.1799L92.9759 75.2799L92.9759 73.7799L91.7698 72.8799L91.7698 71.3799L90.5638 70.4799L90.5638 68.9799L89.3577 68.0799L89.3577 66.5799L88.1517 65.6799L88.1517 64.1799L86.9456 63.2799L86.9456 61.7799L85.7396 60.8799L85.7396 59.3799L84.5335 58.4799L84.5335 56.9799L83.3275 56.0799L83.3275 54.5799L82.1214 53.6799L82.1214 52.1799L80.9154 51.2799L80.9154 49.7799L79.7093 48.8799L79.7093 47.3799L78.5033 46.4799L78.5033 44.9799L77.2972 44.0799L77.2972 42.5799L76.0912 41.6799L76.0912 40.1799L74.8851 39.2799L74.8851 37.7799L73.6791 36.8799L73.6791 35.3799L72.473 34.4799L72.473 32.9799L71.267 32.0799L71.267 30.5799L70.0609 29.6799L70.0609 28.1799L68.8549 27.2799L68.8549 25.7799L67.6488 24.8799L67.6488 23.3799L66.4428 22.4799L66.4428 20.9799L65.2367 20.0799L65.2367 18.5799L64.0307 17.6799L64.0307 16.1799L62.8246 15.2799L62.8246 13.7799L61.6186 12.8799L61.6186 11.3799L60.4125 10.4799L60.4125 8.97992L59.2065 8.07992L59.2065 7.17992L59.8095 6.27992L58.6035 5.67992L58.6035 4.47992L57.3974 3.57992L57.3974 2.07992L56.1914 1.17992L56.1914 -0.320078L54.9853 -1.22008L54.9853 -2.72008L53.7793 -3.62008L53.7793 -5.12008L52.5732 -6.02008L52.5732 -7.52008L51.3672 -8.42008L51.3672 -9.92008L50.1611 -10.8201L50.1611 -12.3201L48.9551 -13.2201L48.9551 -14.7201L47.749 -15.6201L47.749 -17.1201L46.543 -18.0201L46.543 -19.5201L45.337 -20.4201L45.337 -21.9201L44.1309 -22.8201L44.1309 -24.3201L42.9249 -25.2201L42.9249 -26.7201L41.7188 -27.6201L41.7188 -29.1201L40.5128 -30.0201L40.5128 -31.5201L39.3067 -32.4201L39.3067 -33.9201L38.1007 -34.8201L38.1007 -36.3201L36.8946 -37.2201L36.8946 -38.7201L35.6886 -39.6201L35.6886 -41.1201L34.4825 -42.0201L34.4825 -43.5201L33.2765 -44.4201L33.2765 -45.9201L32.0704 -46.8201L32.0704 -48.3201L30.8644 -49.2201L30.8644 -50.7201L29.6583 -51.6201L29.6583 -53.1201L28.4523 -54.0201L28.4523 -55.5201L27.2462 -56.4201L27.2462 -57.9201L26.0402 -58.8201L26.0402 -60.3201L24.8342 -61.2201L24.8342 -62.7201L23.6281 -63.6201L23.6281 -65.1201L22.4221 -66.0201L22.4221 -67.5201L21.2161 -68.4201L21.2161 -69.9201L20.01 -70.8201L20.01 -72.3201L18.804 -73.2201L18.804 -74.7201L17.598 -75.6201L17.598 -77.1201L16.392 -78.0201L16.392 -79.5201L15.1859 -80.4201L15.1859 -81.9201L13.9799 -82.8201L13.9799 -84.3201L12.7739 -85.2201L12.7739 -86.7201L11.5678 -87.6201L11.5678 -89.1201L10.3618 -90.0201L10.3618 -91.5201L9.15578 -92.4201L9.15578 -93.9201L7.94975 -94.8201L7.94975 -96.3201L6.74372 -97.2201L6.74372 -98.7201L5.53769 -99.6201L5.53769 -101.12L4.33166 -102.02L4.33166 -103.52L3.12563 -104.42L3.12563 -105.92L1.9196 -106.82L1.9196 -108.32L0.713568 -109.22L0.713568 -110.72L-0.492462 -111.62L-0.492462 -113.12L-1.69849 -114.02L-1.69849 -115.52L-2.90452 -116.42L-2.90452 -117.92L-4.11055 -118.82L-4.11055 -120.32L-5.31658 -121.22L-5.31658 -122.72L-6.52261 -123.62L-6.52261 -125.12L-7.72864 -126.02L-7.72864 -127.52L-8.93467 -128.42L-8.93467 -129.92L-10.1407 -130.82L-10.1407 -132.32L-11.3467 -133.22L-11.3467 -134.72L-12.5528 -135.62L-12.5528 -137.12L-13.7588 -138.02L-13.7588 -139.52L-14.9648 -140.42L-14.9648 -141.92L-16.1709 -142.82L-16.1709 -144.32L-17.3769 -145.22L-17.3769 -146.72L-18.5829 -147.62L-18.5829 -149.12L-19.7889 -150.02L-19.7889 -151.52L-20.995 -152.42L-20.995 -153.92L-22.201 -154.82L-22.201 -156.32L-23.407 -157.22L-23.407 -158.72L-24.6131 -159.62L-24.6131 -161.12L-25.8191 -162.02L-25.8191 -163.52L-27.0251 -164.42L-27.0251 -165.92L-28.2312 -166.82L-28.2312 -168.32L-29.4372 -169.22L-29.4372 -170.72L-30.6432 -171.62L-30.6432 -173.12L-31.8492 -174.02L-31.8492 -175.52L-33.0553 -176.42L-33.0553 -177.92L-34.2613 -178.82L-34.2613 -180.32L-35.4673 -181.22L-35.4673 -182.72L-36.6734 -183.62L-36.6734 -185.12L-37.8794 -186.02L-37.8794 -187.52L-39.0854 -188.42L-39.0854 -189.92L-40.2915 -190.82L-40.2915 -192.32L-41.4975 -193.22L-41.4975 -194.72L-42.7035 -195.62L-42.7035 -197.12L-43.9096 -198.02L-43.9096 -199.52L-45.1156 -200.42L-45.1156 -201.92L-46.3216 -202.82L-46.3216 -204.32L-47.5276 -205.22L-47.5276 -206.72L-48.7337 -207.62L-48.7337 -209.12L-49.9397 -210.02L-49.9397 -211.52L-51.1457 -212.42L-51.1457 -213.92L-52.3518 -214.82L-52.3518 -216.32L-53.5578 -217.22L-53.5578 -218.72L-54.7638 -219.62L-54.7638 -221.12L-55.9698 -222.02L-55.9698 -223.52L-57.1759 -224.42L-57.1759 -225.92L-58.3819 -226.82L-58.3819 -228.32L-59.5879 -229.22L-59.5879 -230.72L-60.794 -231.62L-60.794 -233.12L-61.9999 -234.02L-61.9999 -235.52L-63.206 -236.42L-63.206 -237.92L-64.412 -238.82L-64.412 -240.32L-65.6181 -241.22L-65.6181 -242.72L-66.8241 -243.62L-66.8241 -245.12L-68.0302 -246.02L-68.0302 -247.52L-69.2362 -248.42L-69.2362 -249.92L-70.4422 -250.82L-70.4422 -252.32L-71.6482 -253.22L-71.6482 -254.72L-72.8543 -255.62L-72.8543 -257.12L-74.0603 -258.02L-74.0603 -259.52L-75.2663 -260.42L-75.2663 -261.92L-76.4724 -262.82L-76.4724 -264.32L-77.6784 -265.22L-77.6784 -266.72L-78.8844 -267.62L-78.8844 -269.12L-80.0905 -270.02L-80.0905 -271.52L-81.2965 -272.42L-81.2965 -273.92L-82.5025 -274.82L-82.5025 -276.32L-83.7085 -277.22L-83.7085 -278.72L-84.9146 -279.62L-84.9146 -281.12L-86.1206 -282.02L-86.1206 -283.52L-87.3266 -284.42L-87.3266 -285.92L-88.5327 -286.82L-88.5327 -288.32L-89.7387 -289.22L-89.7387 -290.72L-90.9447 -291.62L-90.9447 -293.12L-92.1508 -294.02L-92.1508 -295.52L-93.3568 -296.42L-93.3568 -297.92L-94.5628 -298.82L-94.5628 -300.32L-95.7688 -301.22L-95.7688 -302.72L-96.9749 -303.62L-96.9749 -305.12L-98.1809 -306.02L-98.1809 -307.52L-99.3869 -308.42L-99.3869 -309.92L-100.593 -310.82L-100.593 -312.32L-101.799 -313.22L-101.799 -314.72L-103.005 -315.62L-103.005 -317.12L-104.211 -318.02L-104.211 -319.52L-105.417 -320.42L-105.417 -321.92L-106.623 -322.82L-106.623 -324.32L-107.829 -325.22L-107.829 -326.72L-109.035 -327.62L-109.035 -329.12L-110.241 -330.02L-110.241 -331.52L-111.447 -332.42L-111.447 -333.92L-112.653 -334.82L-112.653 -336.32L-113.859 -337.22L-113.859 -338.72L-115.065 -339.62L-115.065 -341.12L-116.271 -342.02L-116.271 -343.52L-117.477 -344.42L-117.477 -345.92L-118.683 -346.82L-118.683 -348.32L-119.889 -349.22L-119.889 -350.72L-121.095 -351.62L-121.095 -353.12L-122.301 -354.02L-122.301 -355.52L-123.507 -356.42L-123.507 -357.92L-124.713 -358.82L-124.713 -360.32L-125.919 -361.22L-125.919 -362.72L-127.125 -363.62L-127.125 -365.12L-128.331 -366.02L-128.331 -367.52L-129.537 -368.42L-129.537 -369.92L-130.743 -370.82L-130.743 -372.32L-131.949 -373.22L-131.949 -374.72L-133.155 -375.62L-133.155 -377.12L-134.361 -378.02L-134.361 -379.52L-135.567 -380.42L-135.567 -381.92L-136.773 -382.82L-136.773 -384.32L-137.979 -385.22L-137.979 -386.72L-139.185 -387.62L-139.185 -389.12L-140.391 -390.02L-140.391 -391.52L-141.597 -392.42L-141.597 -393.92L-142.803 -394.82L-142.803 -396.32L-144.009 -397.22L-144.009 -398.72L-145.215 -399.62L-145.215 -401.12L-146.421 -402.02L-146.421 -403.52L-147.627 -404.42L-147.627 -405.92L-148.833 -406.82L-148.833 -408.32L-150.039 -409.22L-150.039 -410.72L-151.245 -411.62L-151.245 -413.12L-152.451 -414.02L-152.451 -415.52L-153.657 -416.42L-153.657 -417.92L-154.863 -418.82L-154.863 -420.32L-156.069 -421.22L-156.069 -422.72L-157.275 -423.62L-157.275 -425.12L-158.481 -426.02L-158.481 -427.52L-159.687 -428.42L-159.687 -429.92L-160.893 -430.82L-160.893 -432.32L-162.099 -433.22L-162.099 -434.72L-163.305 -435.62L-163.305 -437.12L-164.511 -438.02L-164.511 -439.52L-165.717 -440.42L-165.717 -441.92L-166.923 -442.82L-166.923 -444.32L-168.129 -445.22L-168.129 -446.72L-169.335 -447.62L-169.335 -449.12L-170.541 -450.02L-170.541 -451.52L-171.747 -452.42L-171.747 -453.92L-172.953 -454.82L-172.953 -456.32L-174.159 -457.22L-174.159 -458.72L-175.365 -459.62L-175.365 -461.12L-176.571 -462.02L-176.571 -463.52L-177.777 -464.42L-177.777 -465.92L-178.983 -466.82L-178.983 -468.32L-180.189 -469.22L-180.189 -470.72L-181.395 -471.62L-181.395 -473.12L-182.601 -474.02L-182.601 -475.52L-183.807 -476.42L-183.807 -477.92L-185.013 -478.82L-185.013 -480.32L1000 240.5V481.5H-185.013V-480.32Z' fill='%239333ea' fill-opacity='0.1'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.5;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted-color);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--text-color);
+        }
+        
+        .social-icons a {
+            color: var(--text-muted-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: var(--primary-purple);
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 992px) {
+            #hero h1 {
+                font-size: 2.8rem;
+            }
+            .navbar-nav {
+                text-align: center;
+                background-color: var(--background-end);
+                padding: 15px;
+                border-radius: 10px;
+                margin-top: 10px;
+            }
+        }
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.2rem;
+            }
+            .impact-box .stat-number {
+                font-size: 2.5rem;
+            }
+            .partner-logo {
+                height: 25px;
+                margin: 10px 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+            <div class="container">
+                <a class="navbar-brand fs-4" href="#">ANOLIPI <span class="text-white-50">Digital</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                    <a href="#" class="btn btn-gradient d-none d-lg-inline-block">Let's talk</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="text-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <h1 class="mb-4">Delivering Game-Changing Marketing Solutions</h1>
+                        <p class="lead mb-4 mx-auto" style="max-width: 600px; color: var(--text-muted-color);">Check out how Anolipi Digital can help your business with a free audit of your digital marketing performance.</p>
+                        <a href="#" class="btn btn-gradient btn-lg">Get a Free Audit</a>
+                    </div>
+                </div>
+                <div class="row mt-5 g-4">
+                    <div class="col-md-4">
+                        <div class="hero-feature">
+                            <i class="bi bi-graph-up-arrow mb-2"></i>
+                            <h5>Data-driven Strategy</h5>
+                            <p class="mb-0" style="color: var(--text-muted-color);">Leveraging analytics for impactful results.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="hero-feature">
+                            <i class="bi bi-lightbulb mb-2"></i>
+                            <h5>Creative Excellence</h5>
+                            <p class="mb-0" style="color: var(--text-muted-color);">Crafting campaigns that captivate and convert.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="hero-feature">
+                             <i class="bi bi-patch-check mb-2"></i>
+                            <h5>Proven ROI</h5>
+                            <p class="mb-0" style="color: var(--text-muted-color);">Focused on delivering measurable success.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section-padding">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-8">
+                        <h2 class="mb-3">Services We Provide</h2>
+                        <p class="mb-5" style="color: var(--text-muted-color);">We offer a comprehensive suite of digital marketing services designed to elevate your brand and drive growth in the competitive digital landscape.</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="service-card">
+                            <div class="icon-box"><i class="bi bi-megaphone"></i></div>
+                            <h5 class="mb-2">Advertising & Campaign Mgmt</h5>
+                            <p class="mb-0" style="color: var(--text-muted-color);">Strategic ad campaigns across platforms.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="service-card">
+                            <div class="icon-box"><i class="bi bi-search"></i></div>
+                            <h5 class="mb-2">SEO Services (On-page/Off-page)</h5>
+                            <p class="mb-0" style="color: var(--text-muted-color);">Boost your visibility on search engines.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="service-card">
+                            <div class="icon-box"><i class="bi bi-people"></i></div>
+                            <h5 class="mb-2">Social Media Marketing</h5>
+                            <p class="mb-0" style="color: var(--text-muted-color);">Engage and grow your audience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="service-card">
+                            <div class="icon-box"><i class="bi bi-palette"></i></div>
+                            <h5 class="mb-2">Media Buying (Programmatic)</h5>
+                            <p class="mb-0" style="color: var(--text-muted-color);">Automated and efficient ad placements.</p>
+                        </div>
+                    </div>
+                     <div class="col-md-6 col-lg-4">
+                        <div class="service-card">
+                            <div class="icon-box"><i class="bi bi-pencil-square"></i></div>
+                            <h5 class="mb-2">Branding & Creative Services</h5>
+                            <p class="mb-0" style="color: var(--text-muted-color);">Build a memorable brand identity.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="service-card">
+                            <div class="icon-box"><i class="bi bi-phone"></i></div>
+                            <h5 class="mb-2">Mobile App & Web Dev</h5>
+                            <p class="mb-0" style="color: var(--text-muted-color);">Custom digital solutions for your needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="partners" class="py-5">
+            <div class="container text-center">
+                 <h2 class="mb-5">Our Advertising Partners</h2>
+                 <div class="d-flex flex-wrap justify-content-center align-items-center">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Meta-Logo.svg" alt="Meta" class="partner-logo mx-4 my-2">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Taboola_logo.svg" alt="Taboola" class="partner-logo mx-4 my-2">
+                     <img src="https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_956f70a442145398a597793d2e1181f2/revcontent.png" alt="Revcontent" class="partner-logo mx-4 my-2" style="height: 40px;">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Outbrain_logo.svg" alt="Outbrain" class="partner-logo mx-4 my-2">
+                     <img src="https://upload.wikimedia.org/wikipedia/en/a/a9/TikTok_logo.svg" alt="TikTok" class="partner-logo mx-4 my-2">
+                 </div>
+            </div>
+        </section>
+
+        <section id="about" class="section-padding">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <h2 class="mb-3">Our Areas of Expertise</h2>
+                        <p style="color: var(--text-muted-color);">We specialize in a multi-faceted approach to digital marketing, ensuring every aspect of your online presence is optimized for success.</p>
+                        <ul class="list-unstyled mt-4 list-expertise">
+                            <li>Digital Branding Mastery</li>
+                            <li>Performance Marketing</li>
+                            <li>Lead Generation & Sales Funnels</li>
+                            <li>Content & Ad Creatives</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop" class="img-fluid rounded-3" alt="Digital Marketing Showcase">
+                    </div>
+                </div>
+                <div class="row align-items-center g-5 mt-5">
+                     <div class="col-lg-6 order-lg-2">
+                        <h2 class="mb-3">Why Anolipi Digital?</h2>
+                        <p style="color: var(--text-muted-color);">Choosing the right partner is crucial. We stand out by offering a blend of innovation, expertise, and a client-centric approach that guarantees results.</p>
+                        <ul class="list-unstyled mt-4 list-expertise">
+                            <li>Comprehensive Digital Marketing Solutions</li>
+                            <li>Expert Professionals in Every Niche</li>
+                            <li>ROI-Focussed Evaluated Support</li>
+                            <li>24/7 Dedicated Support</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5 rounded-3" style="background-color: rgba(255,255,255,0.05); min-height: 300px;">
+                             <img src="https://images.unsplash.com/photo-1556740738-b6a63e2775d2?q=80&w=2070&auto=format&fit=crop" class="img-fluid rounded-3" alt="Client Collaboration">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="section-padding">
+            <div class="container">
+                <div class="impact-box text-center">
+                    <div class="row justify-content-center mb-4">
+                        <div class="col-lg-8">
+                            <h2>Our Impact</h2>
+                            <p style="color: var(--text-muted-color);">We believe in numbers that matter. Our track record speaks for itself, showcasing consistent growth and substantial returns for our clients.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-4 mb-md-0">
+                            <div class="stat-number">25+</div>
+                            <p class="text-uppercase" style="color: var(--text-muted-color);">Clients Served</p>
+                        </div>
+                        <div class="col-md-4 mb-4 mb-md-0">
+                            <div class="stat-number">55+</div>
+                            <p class="text-uppercase" style="color: var(--text-muted-color);">Projects Completed</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-number">87M+</div>
+                            <p class="text-uppercase" style="color: var(--text-muted-color);">Ad Spend Managed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-padding">
+            <div class="container">
+                 <div class="cta-box text-center">
+                    <h2>Ready to Boost Your Brand?</h2>
+                    <p class="my-4 mx-auto" style="max-width: 500px; color: var(--text-muted-color);">Let's create something amazing together. Reach out to us and we'll get back to you as soon as possible.</p>
+                    <a href="#" class="btn btn-outline-custom">Contact Us</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center">
+        <div class="footer-map"></div>
+        <div class="container position-relative">
+            <a class="navbar-brand fs-4" href="#">ANOLIPI <span class="text-white-50">Digital</span></a>
+            <div class="footer-links my-4">
+                <a href="#">Home</a>
+                <a href="#services">Services</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center border-top border-white border-opacity-10 pt-4">
+                 <p class="mb-3 mb-sm-0" style="color: var(--text-muted-color);">&copy; 2025 Anolipi Digital. All Rights Reserved.</p>
+                 <div class="social-icons">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                 </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
